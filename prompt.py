@@ -27,7 +27,7 @@ def phone():
             print("Invalid input. \nPlease make sure you are entering a valid 10-digit phone number"
                   "starting with your area code.")
 
-def reasons(gender):
+def reason(gender):
     if gender == "m":
         reason1 = "Building an orphanage for children with their bare hands" \
                   " while playing a sweet, sweet lullaby for those children" \
@@ -63,6 +63,7 @@ def reasons(gender):
                     and reason != "C" and reason != "D" and (reason != "E" or gender != "f"):
                 print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
             else:
+                reason.lower()
                 reasons.append(reason)
                 done = True
         done = False
@@ -76,7 +77,7 @@ def reasons(gender):
             else:
                 print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
 
-def endings(gender):
+def ending(gender):
     if gender == "m":
         ending1 = "I'm on a horse."
         ending2 = "Do do do doot doo do do dooot."
@@ -108,6 +109,7 @@ def endings(gender):
                         and (ending != "C" and ending != "D" and ending != "E" or gender != "m"):
                     print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
                 else:
+                    ending.lower()
                     endings.append(ending)
                     done = True
             done = False
