@@ -46,8 +46,8 @@ def get_name(category, gender, choice):
         print("Get Name Error! (No category provided)")
         return
 
-def concatenate(filenames):
-    destination = open("voicemail.mp3", 'wb')
+def concatenate(filenames, out_filename):
+    destination = open(out_filename + ".mp3", 'wb')
     for filename in filenames:
         shutil.copyfileobj(open(filename, 'rb'), destination)
     destination.close()

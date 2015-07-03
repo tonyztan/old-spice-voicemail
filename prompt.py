@@ -1,5 +1,30 @@
 __author__ = 'tonyz_000'
 
+male_reasons = {'a': "Building an orphanage for children with their bare hands"
+                " while playing a sweet, sweet lullaby for those children"
+                " with two mallets against their abs xylophone.",
+                'b': "Cracking walnuts with their man mind.",
+                'c': "Polishing their monocle smile.",
+                'd': "Ripping out mass loads of weights."}
+
+female_reasons = {'a': "Ingesting my delicious Old Spice man smell.",
+                  'b': "Listening to me read romantic poetry"
+                  " while I make a bouquet of paper flowers from each read page.",
+                  'c': "Enjoying a lobster dinner I prepared just for her while carrying her"
+                  " on my back safely through piranha infested waters.",
+                  'd': "Being serenaded on the moon with the view of the earth"
+                  " while surviving off the oxygen in my lungs via a passionate kiss.",
+                  'e': "Riding a horse backwards with me."}
+
+male_endings = {'a': "I'm on a horse.",
+                'b': "Do do do doot doo do do dooot.",
+                'c': "I'm on a phone.",
+                'd': "SWAN DIVE.",
+                'e': "This voicemail is now diamonds."}
+
+female_endings = {'a': "But she'll get back to you as soon as she can.",
+                  'b': "Thanks for calling."}
+
 def gender():
     while True:
         gender = input("Would you like the: \n [1] Male version \n [2] Female version \n>")
@@ -25,45 +50,34 @@ def phone():
             return number
         else:
             print("Invalid input. \nPlease make sure you are entering a valid 10-digit phone number"
-                  "starting with your area code.")
+                  " starting with your area code.")
 
 def reason(gender):
-    if gender == "m":
-        reason1 = "Building an orphanage for children with their bare hands" \
-                  " while playing a sweet, sweet lullaby for those children" \
-                  " with two mallets against their abs xylophone."
-        reason2 = "Cracking walnuts with their man mind."
-        reason3 = "Polishing their monocle smile."
-        reason4 = "Ripping out mass loads of weights."
-    elif gender == "f":
-        reason1 = "Ingesting my delicious Old Spice man smell."
-        reason2 = "Listening to me read romantic poetry" \
-                  " while I make a bouquet of paper flowers from each read page."
-        reason3 = "Enjoying a lobster dinner I prepared just for her while carrying her" \
-                  " on my back safely through piranha infested waters."
-        reason4 = "Being serenaded on the moon with the view of the earth" \
-                  " while surviving off the oxygen in my lungs via a passionate kiss."
-        reason5 = "Riding a horse backwards with me."
     reasons = []
     reason_num = 0
     while True:
         reason_num += 1
         done = False
         while not done:
-            print("Please select reason number " + str(reason_num) + ":",
-                  "\n[a]", reason1,
-                  "\n[b]", reason2,
-                  "\n[c]", reason3,
-                  "\n[d]", reason4)
-            if gender == "f":
-                print("[e]", reason5)
+            print("Please select reason number " + str(reason_num) + ":")
+            if gender == "m":
+                print("[a]", male_reasons['a'],
+                      "\n[b]", male_reasons['b'],
+                      "\n[c]", male_reasons['c'],
+                      "\n[d]", male_reasons['d'])
+            elif gender == "f":
+                print("[a]", female_reasons['a'],
+                      "\n[b]", female_reasons['b'],
+                      "\n[c]", female_reasons['c'],
+                      "\n[d]", female_reasons['d'],
+                      "\n[e]", female_reasons['e'])
             reason = input(">")
             if reason != "a" and reason != "b" and reason != "c" and reason != "d" \
                     and (reason != "e" or gender != "f") and reason != "A" and reason != "B"\
                     and reason != "C" and reason != "D" and (reason != "E" or gender != "f"):
                 print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
             else:
-                reason.lower()
+                reason = reason.lower()
                 reasons.append(reason)
                 done = True
         done = False
@@ -95,22 +109,25 @@ def ending(gender):
             ending_num += 1
             done = False
             while not done:
-                print("Please select ending number " + str(ending_num) + ":",
-                      "\n[a]", ending1,
-                      "\n[b]", ending2)
+                print("Please select ending number " + str(ending_num) + ":")
                 if gender == "m":
-                    print("[c]", ending3,
-                          "\n[d]", ending4,
-                          "\n[e]", ending5)
-                ending = input(">")
-                if ending != "a" and ending != "b" \
-                        and (ending != "c" and ending != "d" and ending != "e" or gender != "m")\
-                        and ending != "A" and ending != "B" \
-                        and (ending != "C" and ending != "D" and ending != "E" or gender != "m"):
+                    print("[a]", male_endings['a'],
+                          "\n[b]", male_endings['b'],
+                          "\n[c]", male_endings['c'],
+                          "\n[d]", male_endings['d'],
+                          "\n[e]", male_endings['e'])
+                elif gender == "f":
+                    print("[a]", female_endings['a'],
+                          "\n[b]", female_endings['b'])
+                end = input(">")
+                if end != "a" and end != "b" \
+                        and (end != "c" and end != "d" and end != "e" or gender != "m")\
+                        and end != "A" and end != "B" \
+                        and (end != "C" and end != "D" and end != "E" or gender != "m"):
                     print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
                 else:
-                    ending.lower()
-                    endings.append(ending)
+                    end = end.lower()
+                    endings.append(end)
                     done = True
             done = False
             while not done:
@@ -122,3 +139,33 @@ def ending(gender):
                     return endings
                 else:
                     print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
+
+def filename():
+    name = str(input("What would you like the audio file to be named? (You do not need to include the extension.)\n>"))
+    return name
+
+def confirm(gender, phone, reasons, endings):
+    print("Here are the options you have selected:")
+    print("Gender:", gender)
+    print("Phone number:", phone)
+    print("You have selected the following reasons:")
+    if gender == "m":
+        for choice in reasons:
+            print(male_reasons[choice])
+        print("You have selected the following endings:")
+        for choice in endings:
+            print(male_endings[choice])
+    if gender == "f":
+        for choice in reasons:
+            print(female_reasons[choice])
+        print("You have selected the following endings:")
+        for choice in endings:
+            print(female_endings[choice])
+    while True:
+        done = input("Is the above information correct?[yes/no] \n>")
+        if done == "yes" or done == "y":
+            return True
+        elif done == "no" or done == "n":
+            return False
+        else:
+            print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
