@@ -2,6 +2,7 @@ __author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
 
 import urllib.request
 import shutil
+import os
 
 def download(name):
     url = "https://tonyztan.github.io/static/old-spice-voicemail/" + name
@@ -51,3 +52,7 @@ def concatenate(filenames, out_filename):
     for filename in filenames:
         shutil.copyfileobj(open(filename, 'rb'), destination)
     destination.close()
+    filenames = set(filenames)
+    for filename in filenames:
+        os.remove(filename)
+    return
