@@ -33,7 +33,7 @@ def main():
     if gender == "m":
         filenames.append("m-r0-cannot_come_to_phone.mp3")
     elif gender == "f":
-        filenames.append("f-r0.1-unable_to_take_call.mp3f-r0.2-she_is_busy.mp3")
+        filenames.append("f-r0.1-unable_to_take_call.mp3")
         filenames.append("f-r0.2-she_is_busy.mp3")
 
     for reason in reasons:
