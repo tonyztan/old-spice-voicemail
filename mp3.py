@@ -1,4 +1,4 @@
-__author__ = 'tonyz_000'
+__author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
 
 import urllib.request
 import shutil

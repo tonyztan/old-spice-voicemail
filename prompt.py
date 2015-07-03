@@ -1,4 +1,4 @@
-__author__ = 'tonyz_000'
+__author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
 
 male_reasons = {'a': "Building an orphanage for children with their bare hands"
                 " while playing a sweet, sweet lullaby for those children"

@@ -1,4 +1,4 @@
-__author__ = 'Tony Zhaocheng Tan'
+__author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
 
 import prompt
 import mp3
