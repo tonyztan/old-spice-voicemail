@@ -1,7 +1,9 @@
 # Old Spice Voicemail Generator
 Python-based Old Spice Voicemail Generator.
 
-Final Project for the Information and Computer Security class at the University of Southern California Summer Program.
+Final Project for the Information and Computer Security course at the University of Southern California Summer Program.
+
+Project information is available [here](https://tonyztan.github.io/static/old-spice-voicemail/itp125 - python programming project.docx).
 
 ##License
 The MIT License (MIT)
