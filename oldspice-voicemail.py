@@ -13,14 +13,19 @@ def main():
     print(phone)
     print(reasons)
     print(endings)
+    filenames = []
     for number in phone:
         name = mp3.get_name("number", gender, number)
         mp3.download(name)
+        filenames.append(name)
     for reason in reasons:
         name = mp3.get_name("reason", gender, reason)
         mp3.download(name)
+        filenames.append(name)
     for ending in endings:
         name = mp3.get_name("ending", gender, ending)
         mp3.download(name)
+        filenames.append(name)
+    mp3.concatenate(filenames)
 
 main()
