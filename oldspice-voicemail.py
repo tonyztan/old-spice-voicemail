@@ -1,11 +1,36 @@
-__author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
+#!/usr/bin/env python
 
-import prompt
-import mp3
+"""
+Old Spice Voicemail Generator.
+
+Generates a voicemail message using spliced sounds of the Old Spice Guy,
+based on a phone number, reasons, and endings selected by the user.
+
+Outputs a mp3 file based on a name of the user's choosing and mp3list.txt listing the files used.
+
+Provides an interactive user interface, but also supports command-line arguments.
+"""
+
 import sys
 import getopt
+import prompt
+import mp3
+
+__author__ = 'Tony Zhaocheng Tan'
+__copyright__ = "Copyright 2015, Tony Zhaocheng Tan"
+__license__ = "MIT"
+__version__ = "1.0"
+__email__ = "tony@tonytan.io"
 
 def process(gender, phone, reasons, endings, out_filename):
+    """
+    Takes all the information and calls other functions to create the final mp3 file.
+    :param gender: 'm' or 'f'.
+    :param phone: a string that represents the phone number, consisting of exactly 10 digits. ('9876543210')
+    :param reasons: a list of all the reasons a user selected, with each reason represented by a letter. (['a', 'c'])
+    :param endings: a list of all the endings a user selected, with each ending represented by a letter. (['a', 'b'])
+    :param out_filename: a string that is the desired file name chosen by the user. ("JohnDoeVoicemail")
+    """
     print("\nPlease wait while we prepare your recording...")
     filenames = mp3.get_file_list(gender, phone, reasons, endings)
 
@@ -20,6 +45,11 @@ def process(gender, phone, reasons, endings, out_filename):
     print("\nYour recording has been created and saved! Enjoy!")
 
 def interactive():
+    """
+    Provides an interactive user interface.
+
+    Prompts the user for gender, phone, reason choice, and ending choice, and passes this on to process().
+    """
     done = False
     while not done:
         print("Welcome to the Old Spice Voicemail generator!")
@@ -34,6 +64,9 @@ def interactive():
     process(gender, phone, reasons, endings, out_filename)
 
 def syntax():
+    """
+    Prints out the correct syntax for command-line arguments, and then terminates the program.
+    """
     print("Syntax: \noldspice-voicemail.py --gender <m/f> --phone <10-digit number without separators> "
           "--reasons <reason letters> --endings <ending letters> --out <output filename>")
     print("\nExample: \noldspice-voicemail.py --gender m --phone 8881234567 --reasons acd --endings abde --out JohnDoe")
@@ -42,6 +75,14 @@ def syntax():
     sys.exit()
 
 def parse_arguments(opts):
+    """
+    Parses all command-line arguments that the program is given.
+
+    If all the necessary arguments have been provided correctly, the parameters are passed to process().
+
+    Otherwise, syntax() is called and the program ends.
+    :param opts: A list of all the arguments used when the program is run.
+    """
     gender = ""
     phone = ""
     out_filename = ""
@@ -90,6 +131,13 @@ def parse_arguments(opts):
         syntax()
 
 def main():
+    """
+    Calls either interactive() or parse_arguments().
+
+    If no arguments are given, interactive mode is started using interactive().
+
+    If there are arguments to be parsed, parse_arguments() is called.
+    """
     try:
         opts, args = getopt.getopt(sys.argv[1:], "g:p:r:e:o:h", ["gender=", "phone=", "reasons=", "endings=", "out=", "help"])
     except getopt.GetoptError:

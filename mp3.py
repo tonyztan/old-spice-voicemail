@@ -1,12 +1,34 @@
-__author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
+#!/usr/bin/env python
 
+"""
+Handles file operations, part of the Old Spice Voicemail Generator.
+
+Contains functions for downloading and concatenating mp3 files,
+and for getting individual file names and generating a list of file names.
+"""
+
+import sys
+import os
 import urllib.request
 import urllib.error
 import shutil
-import os
-import sys
+
+__author__ = 'Tony Zhaocheng Tan'
+__copyright__ = "Copyright 2015, Tony Zhaocheng Tan"
+__license__ = "MIT"
+__version__ = "1.0"
+__email__ = "tony@tonytan.io"
 
 def download(name):
+    """
+    Downloads the file with the requested name from the server.
+
+    Uses a secure HTTPS connection to https://tonyztan.github.io/.
+    If a secure connection cannot be established, a warning is displayed to the user and the program is terminated.
+
+    :param name: The name of the file to be downloaded. Must exist on the server.
+    :return: Nothing is returned. The downloaded files are stored in the program's directory.
+    """
     url = "https://tonyztan.github.io/static/old-spice-voicemail/" + name
     print("Downloading:", name)
     try:
@@ -23,6 +45,16 @@ def download(name):
     return
 
 def get_name(category, gender, choice):
+    """
+    Gets the name of the file corresponding to the category, gender, and option requested.
+    :param category: Type of file. Can be "number", "reason", or "ending".
+    :param gender: 'm' or 'f'.
+    :param choice: Specifies the file being requested for.
+    If the category is "number", then the choice can be any number from 0 to 9. ('8')
+    If the category is "reason", then the choice can be any letter choice that is valid for the specified gender. ('b')
+    If the category is "ending", then the choice can be any letter choice that is valid for the specified gender. ('a')
+    :return: Returns the name of the file requested as a string.
+    """
     if category == "number":
         if choice in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
             return choice + ".mp3"
@@ -69,12 +101,20 @@ def get_name(category, gender, choice):
                 sys.exit()
         else:
             print("Get Name Error! (Invalid gender)")
-            return
+            sys.exit()
     else:
         print("Get Name Error! (Invalid category)")
         sys.exit()
 
 def get_file_list(gender, phone, reasons, endings):
+    """
+    Creates a list of names of the files needed to produce the final mp3 based on user's preferences.
+    :param gender: 'm' or 'f'.
+    :param phone: a string that represents the phone number, consisting of exactly 10 digits. ('9876543210')
+    :param reasons: a list of all the reasons a user selected, with each reason represented by a letter. (['a', 'c'])
+    :param endings: a list of all the endings a user selected, with each ending represented by a letter. (['a', 'b'])
+    :return: Returns a list of all the file names needed to create the final mp3 file.
+    """
     filenames = []
 
     if gender == "m":
@@ -108,6 +148,16 @@ def get_file_list(gender, phone, reasons, endings):
     return filenames
 
 def concatenate(filenames, out_filename):
+    """
+    Takes a list of spliced mp3 files and combines them together into one mp3 file,
+    and then deletes the mp3 files used.
+
+    Also outputs mp3list.txt listing the names of every file used to create the final file.
+
+    :param filenames: a list of file names to be combined. (["m-b1-hello.mp3", "9.mp3", "7.mp3"])
+    :param out_filename: a string that is the desired file name chosen by the user. ("JohnDoeVoicemail")
+    :return: Nothing is returned. The combined mp3 file is stored in the program's directory.
+    """
     destination = open(out_filename + ".mp3", 'wb')
     file_list = open("mp3list.txt", 'w')
     for filename in filenames:

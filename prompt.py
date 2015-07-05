@@ -1,6 +1,20 @@
-__author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
+#!/usr/bin/env python
+
+"""
+Handles interactive prompts, part of the Old Spice Voicemail Generator.
+
+Each function prompts the user for a different piece of information.
+
+Functions: gender, phone, reason, ending, filename, show_settings, confirm
+"""
 
 import sys
+
+__author__ = 'Tony Zhaocheng Tan'
+__copyright__ = "Copyright 2015, Tony Zhaocheng Tan"
+__license__ = "MIT"
+__version__ = "1.0"
+__email__ = "tony@tonytan.io"
 
 male_reasons = {'a': "Building an orphanage for children with their bare hands"
                 " while playing a sweet, sweet lullaby for those children"
@@ -28,6 +42,10 @@ female_endings = {'a': "But she'll get back to you as soon as she can.",
                   'b': "Thanks for calling."}
 
 def gender():
+    """
+    Prompts the user to choose "male" or "female".
+    :return: Returns "m" or "f"
+    """
     while True:
         gender = input("Would you like the: \n [1] Male version \n [2] Female version \n>")
         if gender in ("1", "m", "M", "male", "Male"):
@@ -38,6 +56,13 @@ def gender():
             print("Invalid input. \nPlease make sure you are entering the number of your choice.")
 
 def phone():
+    """
+    Prompts the user to enter a 10-digit phone number.
+
+    Ignoring all input that is not a number, the function makes sure that the number does not start with "0" or "1",
+    and then checks to see if the number is exactly 10 digits long.
+    :return: Returns the number as a string.
+    """
     while True:
         number_raw = str(input("Please enter your 10-digit phone number: \n>"))
         number = ""
@@ -45,7 +70,8 @@ def phone():
         for char in number_raw:
             if char in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
                 number += char
-                have_number = True
+                if char in ("2", "3", "4", "5", "6", "7", "8", "9"):
+                    have_number = True
 
         if have_number:
             # Area codes do not start with "0" or "1"; therefore they are removed from the beginning
@@ -58,6 +84,11 @@ def phone():
               "starting with your area code.")
 
 def reason(gender):
+    """
+    Prompts the user to select reasons to be included in the voicemail message.
+    :param gender: 'm' or 'f'.
+    :return: Returns the selected reasons as letters in a list.
+    """
     reasons = []
     reason_num = 0
     while True:
@@ -97,6 +128,11 @@ def reason(gender):
                 print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
 
 def ending(gender):
+    """
+    Prompts the user to select endings to be included in the voicemail message.
+    :param gender: 'm' or 'f'.
+    :return: Returns the selected endings as letters in a list.
+    """
     if gender == "m":
         ending1 = "I'm on a horse."
         ending2 = "Do do do doot doo do do dooot."
@@ -146,6 +182,12 @@ def ending(gender):
                     print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
 
 def filename():
+    """
+    Prompts the user for the desired file name of the output mp3 file.
+
+    Checks to make sure the name is alphanumeric.
+    :return: Returns the name as a string.
+    """
     while True:
         name = str(input("What would you like the audio file to be named? "
                          "(You do not need to include the extension.)\n>"))
@@ -155,6 +197,14 @@ def filename():
             print("Invalid input. Please check to make sure that you have only entered letters and/or numbers.")
 
 def show_settings(gender, phone, reasons, endings):
+    """
+    Prints out all the settings that the user has selected.
+    :param gender: 'm' or 'f'.
+    :param phone: a string that represents the phone number, consisting of exactly 10 digits. ('9876543210')
+    :param reasons: a list of all the reasons a user selected, with each reason represented by a letter. (['a', 'c'])
+    :param endings: a list of all the endings a user selected, with each ending represented by a letter. (['a', 'b'])
+    :return: Nothing is returned.
+    """
     print("\nHere are the options you have selected:")
 
     if str(gender) == 'm':
@@ -192,8 +242,17 @@ def show_settings(gender, phone, reasons, endings):
             else:
                 print("Get Name Error! (Invalid ending)")
                 sys.exit()
+    return
 
 def confirm(gender, phone, reasons, endings):
+    """
+    Asks the user to confirm the settings that have been selected.
+    :param gender: 'm' or 'f'.
+    :param phone: a string that represents the phone number, consisting of exactly 10 digits. ('9876543210')
+    :param reasons: a list of all the reasons a user selected, with each reason represented by a letter. (['a', 'c'])
+    :param endings: a list of all the endings a user selected, with each ending represented by a letter. (['a', 'b'])
+    :return: Returns True if the user has confirmed the settings. Returns False if the user wishes to start over.
+    """
     show_settings(gender, phone, reasons, endings)
     while True:
         done = input("\nIs the above information correct?[yes/no] \n>")
