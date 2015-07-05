@@ -1,5 +1,7 @@
 __author__ = 'Tony Zhaocheng Tan <https://tonytan.io/about>'
 
+import sys
+
 male_reasons = {'a': "Building an orphanage for children with their bare hands"
                 " while playing a sweet, sweet lullaby for those children"
                 " with two mallets against their abs xylophone.",
@@ -28,9 +30,9 @@ female_endings = {'a': "But she'll get back to you as soon as she can.",
 def gender():
     while True:
         gender = input("Would you like the: \n [1] Male version \n [2] Female version \n>")
-        if gender == "1" or gender == "m" or gender == "M" or gender == "male" or gender == "Male":
+        if gender in ("1", "m", "M", "male", "Male"):
             return "m"
-        elif gender == "2" or gender == "f" or gender == "F" or gender == "female" or gender == "Female":
+        elif gender in ("2", "f", "F", "female", "Female"):
             return "f"
         else:
             print("Invalid input. \nPlease make sure you are entering the number of your choice.")
@@ -39,18 +41,21 @@ def phone():
     while True:
         number_raw = str(input("Please enter your 10-digit phone number: \n>"))
         number = ""
+        have_number = False
         for char in number_raw:
-            if char == "0" or char == "1" or char == "2" or char == "3" or char == "4"\
-                    or char == "5" or char == "6" or char == "7" or char == "8" or char == "9":
+            if char in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
                 number += char
-        # Area codes do not start with "0" or "1"; therefore may be user error
-        while number[0] == "0" or number[0] == "1":
-            number = number[1:]
-        if len(number) == 10:
-            return number
-        else:
-            print("Invalid input. \nPlease make sure you are entering a valid 10-digit phone number"
-                  " starting with your area code.")
+                have_number = True
+
+        if have_number:
+            # Area codes do not start with "0" or "1"; therefore they are removed from the beginning
+            while number[0] in ("0", "1"):
+                number = number[1:]
+            if len(number) == 10:
+                return number
+
+        print("Invalid input. \nPlease make sure you are entering a valid 10-digit phone number"
+              "starting with your area code.")
 
 def reason(gender):
     reasons = []
@@ -72,9 +77,9 @@ def reason(gender):
                       "\n[d]", female_reasons['d'],
                       "\n[e]", female_reasons['e'])
             reason = input(">")
-            if reason != "a" and reason != "b" and reason != "c" and reason != "d" \
-                    and (reason != "e" or gender != "f") and reason != "A" and reason != "B"\
-                    and reason != "C" and reason != "D" and (reason != "E" or gender != "f"):
+            if reason not in ("a", "b", "c", "d") \
+                    and (reason != "e" or gender != "f") and reason not in ("A", "B", "C", "D")\
+                    and (reason != "E" or gender != "f"):
                 print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
             else:
                 reason = reason.lower()
@@ -84,9 +89,9 @@ def reason(gender):
         while not done:
             print("You have selected", str(reason_num), "reason(s).")
             more = input("Would you like to select more reasons? [yes/no] \n>")
-            if more == "yes" or more == "y":
+            if more in ("yes", "y", "YES", "Y", "Yes"):
                 done = True
-            elif more == "no" or more == "n":
+            elif more in ("no", "n", "NO", "N", "No"):
                 return reasons
             else:
                 print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
@@ -120,10 +125,10 @@ def ending(gender):
                     print("[a]", female_endings['a'],
                           "\n[b]", female_endings['b'])
                 end = input(">")
-                if end != "a" and end != "b" \
-                        and (end != "c" and end != "d" and end != "e" or gender != "m")\
-                        and end != "A" and end != "B" \
-                        and (end != "C" and end != "D" and end != "E" or gender != "m"):
+                if end not in ("a", "b") \
+                        and (end not in ("c", "d", "e") or gender != "m")\
+                        and end not in ("A", "B") \
+                        and (end not in ("C", "D", "E") or gender != "m"):
                     print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
                 else:
                     end = end.lower()
@@ -133,39 +138,68 @@ def ending(gender):
             while not done:
                 print("You have selected " + str(ending_num) + " ending(s).")
                 more = input("Would you like to select more endings? [yes/no] \n>")
-                if more == "yes" or more == "y":
+                if more in ("yes", "y", "YES", "Y", "Yes"):
                     done = True
-                elif more == "no" or more == "n":
+                elif more in ("no", "n", "NO", "N", "No"):
                     return endings
                 else:
                     print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
 
 def filename():
-    name = str(input("What would you like the audio file to be named? (You do not need to include the extension.)\n>"))
-    return name
+    while True:
+        name = str(input("What would you like the audio file to be named? "
+                         "(You do not need to include the extension.)\n>"))
+        if name.isalnum():
+            return name
+        else:
+            print("Invalid input. Please check to make sure that you have only entered letters and/or numbers.")
 
-def confirm(gender, phone, reasons, endings):
-    print("Here are the options you have selected:")
+def show_settings(gender, phone, reasons, endings):
+    print("\nHere are the options you have selected:")
+
+    if str(gender) == 'm':
+        gender = "Male"
+    elif str(gender) == 'f':
+        gender == "Female"
     print("Gender:", gender)
     print("Phone number:", phone)
-    print("You have selected the following reasons:")
-    if gender == "m":
+    print("\nYou have selected the following reasons:")
+    if gender == "Male":
         for choice in reasons:
-            print(male_reasons[choice])
-        print("You have selected the following endings:")
+            if choice in male_reasons:
+                print(male_reasons[choice])
+            else:
+                print("Get Name Error! (Invalid reason)")
+                sys.exit()
+        print("\nYou have selected the following endings:")
         for choice in endings:
-            print(male_endings[choice])
-    if gender == "f":
+            if choice in male_endings:
+                print(male_endings[choice])
+            else:
+                print("Get Name Error! (Invalid ending)")
+                sys.exit()
+    if gender == "Female":
         for choice in reasons:
-            print(female_reasons[choice])
-        print("You have selected the following endings:")
+            if choice in female_reasons:
+                print(female_reasons[choice])
+            else:
+                print("Get Name Error! (Invalid reason)")
+                sys.exit()
+        print("\nYou have selected the following endings:")
         for choice in endings:
-            print(female_endings[choice])
+            if choice in female_endings:
+                print(female_endings[choice])
+            else:
+                print("Get Name Error! (Invalid ending)")
+                sys.exit()
+
+def confirm(gender, phone, reasons, endings):
+    show_settings(gender, phone, reasons, endings)
     while True:
-        done = input("Is the above information correct?[yes/no] \n>")
-        if done == "yes" or done == "y":
+        done = input("\nIs the above information correct?[yes/no] \n>")
+        if done in ("yes", "y", "YES", "Y", "Yes"):
             return True
-        elif done == "no" or done == "n":
+        elif done in ("no", "n", "NO", "N", "No"):
             return False
         else:
             print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
