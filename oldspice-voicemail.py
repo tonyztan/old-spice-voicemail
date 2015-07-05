@@ -32,7 +32,7 @@ def process(gender, phone, reasons, endings, out_filename):
     :param out_filename: a string that is the desired file name chosen by the user. ("JohnDoeVoicemail")
     """
     print("\nPlease wait while we prepare your recording...")
-    filenames = mp3.get_file_list(gender, phone, reasons, endings)
+    filenames = mp3.get_file_list(gender, phone, reasons, endings)  # Get the list of files
 
     print("\nDownloading necessary files...")
     for file in set(filenames):
@@ -51,14 +51,14 @@ def interactive():
     Prompts the user for gender, phone, reason choice, and ending choice, and passes this on to process().
     """
     done = False
-    while not done:
+    while not done:  # Loops until the user confirms all settings
         print("Welcome to the Old Spice Voicemail generator!")
         gender = prompt.gender()
         phone = prompt.phone()
         reasons = prompt.reason(gender)
         endings = prompt.ending(gender)
         done = prompt.confirm(gender, phone, reasons, endings)
-        if not done:
+        if not done:  # If the user does not confirm the settings, start over
             print("Let's start over again.")
     out_filename = prompt.filename()
     process(gender, phone, reasons, endings, out_filename)
@@ -86,7 +86,7 @@ def parse_arguments(opts):
     gender = ""
     phone = ""
     out_filename = ""
-    for opt, arg in opts:
+    for opt, arg in opts:  # For each argument
         if opt in ('-g', "--gender"):
             if arg in ('m', 'f'):
                 gender = arg
@@ -124,7 +124,7 @@ def parse_arguments(opts):
                 syntax()
         elif opt in ('-h', "--help"):
             syntax()
-    if gender != "" and phone != "" and out_filename != "" and reasons and endings:
+    if gender != "" and phone != "" and out_filename != "" and reasons and endings:  # If everything has been provided
         prompt.show_settings(gender, phone, reasons, endings)
         process(gender, phone, reasons, endings, out_filename)
     else:
@@ -139,10 +139,11 @@ def main():
     If there are arguments to be parsed, parse_arguments() is called.
     """
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "g:p:r:e:o:h", ["gender=", "phone=", "reasons=", "endings=", "out=", "help"])
+        opts, args = getopt.getopt(sys.argv[1:],
+                                   "g:p:r:e:o:h", ["gender=", "phone=", "reasons=", "endings=", "out=", "help"])
     except getopt.GetoptError:
         interactive()
-    if not opts:
+    if not opts:  # If opts is empty
         interactive()
     else:
         parse_arguments(opts)

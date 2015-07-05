@@ -33,6 +33,8 @@ def download(name):
     print("Downloading:", name)
     try:
         with urllib.request.urlopen(url, cafile="DigiCert_EV_Root.cer") as response, open(name, 'wb') as file:
+            # Requests the file and verifies the server certificate using the expected DigiCert Root CA used by GitHub.
+            # Copies all of the response from server to a local file of the same name.
             shutil.copyfileobj(response, file)
     except urllib.error.URLError:
         print("Your Internet connection is not private. A secure connection to the server cannot be established."
@@ -115,7 +117,7 @@ def get_file_list(gender, phone, reasons, endings):
     :param endings: a list of all the endings a user selected, with each ending represented by a letter. (['a', 'b'])
     :return: Returns a list of all the file names needed to create the final mp3 file.
     """
-    filenames = []
+    filenames = []  # A list that contains the names of every file to be used.
 
     if gender == "m":
         filenames.append("m-b1-hello.mp3")
@@ -160,12 +162,12 @@ def concatenate(filenames, out_filename):
     """
     destination = open(out_filename + ".mp3", 'wb')
     file_list = open("mp3list.txt", 'w')
-    for filename in filenames:
-        shutil.copyfileobj(open(filename, 'rb'), destination)
-        file_list.write(filename + "\n")
+    for filename in filenames:  # For each file in the list of files
+        shutil.copyfileobj(open(filename, 'rb'), destination)  # Copy all contents of the file to the final output
+        file_list.write(filename + "\n")  # Write the file name to mp3list.txt
     destination.close()
-    file_list.close
+    file_list.close()
     print("Cleaning up temporary files...")
-    for filename in set(filenames):
+    for filename in set(filenames):  # Deduplicates the file list and then removes each file in it
         os.remove(filename)
     return
