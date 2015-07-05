@@ -5,6 +5,17 @@ Final Project for the Information and Computer Security course at the University
 
 Project information is available [here](https://tonyztan.github.io/static/old-spice-voicemail/itp125 - python programming project.docx).
 
+## Audio
+All audio used is originally from the following videos by Old Spice:
+
+Male version: https://www.youtube.com/watch?v=-8JsvwUcok0
+
+Female version: https://www.youtube.com/watch?v=Kx-78v6WLN8
+
+The spliced files were provided by the instructor, available here:
+
+http://www-bcf.usc.edu/~chiso/itp125/project_version_1/
+
 ##License
 The MIT License (MIT)
 
