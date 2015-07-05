@@ -12,9 +12,7 @@ Male version: https://www.youtube.com/watch?v=-8JsvwUcok0
 
 Female version: https://www.youtube.com/watch?v=Kx-78v6WLN8
 
-The spliced files were provided by the instructor, available here:
-
-http://www-bcf.usc.edu/~chiso/itp125/project_version_1/
+The spliced files were provided by the instructor, available [here](http://www-bcf.usc.edu/~chiso/itp125/project_version_1/).
 
 ##License
 The MIT License (MIT)
