@@ -60,7 +60,7 @@ def parse_arguments(opts):
             if len(arg) < 6:
                 reasons = []
                 for char in arg:
-                    if char == 'a' or char == 'b' or char == 'c' or char == 'd' or char == 'e':
+                    if char in ('a', 'b', 'c', 'd', 'e'):
                         reasons.append(char)
                 if not reasons:
                     syntax()
@@ -70,7 +70,7 @@ def parse_arguments(opts):
             if len(arg) < 6:
                 endings = []
                 for char in arg:
-                    if char == 'a' or char == 'b' or char == 'c' or char == 'd' or char == 'e':
+                    if char in ('a', 'b', 'c', 'd', 'e'):
                         endings.append(char)
                 if not endings:
                     syntax()
