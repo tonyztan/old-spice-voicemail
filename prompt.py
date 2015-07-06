@@ -91,9 +91,8 @@ def reason(gender):
     :return: Returns the selected reasons as letters in a list.
     """
     reasons = []
-    reason_num = 0  # How many reasons are being selected.
+    reason_num = 1  # How many reasons are being selected.
     while True:
-        reason_num += 1
         done = False  # Represents whether the reason is done being selected.
         while not done:
             print("Please select reason number " + str(reason_num) + ":")
@@ -122,6 +121,7 @@ def reason(gender):
             print("You have selected", str(reason_num), "reason(s).")
             more = input("Would you like to select more reasons? [yes/no] \n>")
             if more in ("yes", "y", "YES", "Y", "Yes"):
+                reason_num += 1
                 done = True  # Question answered, now loop will return to top to ask for next reason.
             elif more in ("no", "n", "NO", "N", "No"):
                 return reasons  # Reason selection over, return list of reasons.
@@ -145,11 +145,10 @@ def ending(gender):
         ending2 = "Thanks for calling."
 
     endings = []
-    ending_num = 0  # How many endings are being selected.
+    ending_num = 1  # How many endings are being selected.
     while True:
         done = False  # Represents whether the ending is done being selected.
         while not done:
-            ending_num += 1
             print("Please select ending number " + str(ending_num) + ":")
             if gender == "m":
                 print("[a]", male_endings['a'],
@@ -176,6 +175,7 @@ def ending(gender):
             print("You have selected " + str(ending_num) + " ending(s).")
             more = input("Would you like to select more endings? [yes/no] \n>")
             if more in ("yes", "y", "YES", "Y", "Yes"):
+                ending_num += 1
                 done = True  # Question answered, now loop will return to top to ask for next reason.
             elif more in ("no", "n", "NO", "N", "No"):
                 return endings  # Ending selection over, return list of reasons.
