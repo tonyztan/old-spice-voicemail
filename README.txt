@@ -58,7 +58,7 @@ Female endings:
 
 When the correct arguments are passed on to the program, the program will list the settings selected and download the necessary spliced mp3 files from GitHub using a secure HTTPS connection. It will parse them and output the final voicemail message in the mp3 format, along with "mp3list.txt", which lists all of the files used to produce the message.
 
-## Audio
+## Audio Credits
 All audio used is originally from the following videos by Old Spice:
 
 Male version: https://www.youtube.com/watch?v=-8JsvwUcok0
