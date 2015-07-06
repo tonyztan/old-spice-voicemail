@@ -16,6 +16,8 @@ Information about the assignment can be found [here](https://tonyztan.github.io/
 
 This program can operate in two modes: interactive and passive. The mode is automatically selected based on whether arguments are passed on to the program when it is run.
 
+This program is based on Python 3. Please make sure that you are using the Python 3 interpreter.
+
 ### Interactive mode
 For most users, it is recommended to use the interactive mode by simplying running `oldspice-voicemail.py`. In this mode, the user is guided through all the possible options for the voicemail via a series of questions. The user is prompted to enter a phone number, select a gender, and choose the reasons and endings to be included in the voicemail.
 
