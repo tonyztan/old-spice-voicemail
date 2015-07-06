@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Handles file operations, part of the Old Spice Voicemail Generator.
