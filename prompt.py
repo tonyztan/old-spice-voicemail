@@ -237,7 +237,6 @@ def show_settings(gender, phone, reasons, endings):
                 print("Get Name Error! (Invalid reason)")
                 sys.exit()
         print("\nYou have selected the following endings:")
-        print(endings)
         for choice in endings:
             if choice in female_endings:
                 print(female_endings[choice])
