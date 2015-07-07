@@ -160,6 +160,9 @@ def concatenate(filenames, out_filename):
     :param out_filename: a string that is the desired file name chosen by the user. ("JohnDoeVoicemail")
     :return: Nothing is returned. The combined mp3 file is stored in the program's directory.
     """
+    while os.path.isfile(out_filename + ".mp3"):  # Checks for an existing file with the same name
+        out_filename += ".output"
+        print("The output file has been renamed to", out_filename + ".mp3 because a naming conflict has been detected.")
     destination = open(out_filename + ".mp3", 'wb')
     file_list = open("mp3list.txt", 'w')
     for filename in filenames:  # For each file in the list of files
