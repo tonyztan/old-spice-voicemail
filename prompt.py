@@ -17,19 +17,19 @@ __version__ = "1.0"
 __email__ = "tony@tonytan.io"
 
 male_reasons = {'a': "Building an orphanage for children with their bare hands"
-                " while playing a sweet, sweet lullaby for those children"
-                " with two mallets against their abs xylophone.",
+                     " while playing a sweet, sweet lullaby for those children"
+                     " with two mallets against their abs xylophone.",
                 'b': "Cracking walnuts with their man mind.",
                 'c': "Polishing their monocle smile.",
                 'd': "Ripping out mass loads of weights."}
 
 female_reasons = {'a': "Ingesting my delicious Old Spice man smell.",
                   'b': "Listening to me read romantic poetry"
-                  " while I make a bouquet of paper flowers from each read page.",
+                       " while I make a bouquet of paper flowers from each read page.",
                   'c': "Enjoying a lobster dinner I prepared just for her while carrying her"
-                  " on my back safely through piranha infested waters.",
+                       " on my back safely through piranha infested waters.",
                   'd': "Being serenaded on the moon with the view of the earth"
-                  " while surviving off the oxygen in my lungs via a passionate kiss.",
+                       " while surviving off the oxygen in my lungs via a passionate kiss.",
                   'e': "Riding a horse backwards with me."}
 
 male_endings = {'a': "I'm on a horse.",
@@ -40,6 +40,7 @@ male_endings = {'a': "I'm on a horse.",
 
 female_endings = {'a': "But she'll get back to you as soon as she can.",
                   'b': "Thanks for calling."}
+
 
 def gender():
     """
@@ -54,6 +55,7 @@ def gender():
             return "f"
         else:
             print("Invalid input. \nPlease make sure you are entering the number of your choice.")
+
 
 def phone():
     """
@@ -84,6 +86,7 @@ def phone():
         print("Invalid input. \nPlease make sure you are entering a valid 10-digit phone number"
               "starting with your area code.")
 
+
 def reason(gender):
     """
     Prompts the user to select reasons to be included in the voicemail message.
@@ -109,7 +112,7 @@ def reason(gender):
                       "\n[e]", female_reasons['e'])
             reason = input(">")
             if reason not in ("a", "b", "c", "d") \
-                    and (reason != "e" or gender != "f") and reason not in ("A", "B", "C", "D")\
+                    and (reason != "e" or gender != "f") and reason not in ("A", "B", "C", "D") \
                     and (reason != "E" or gender != "f"):  # Checks if the selected reason is valid for the gender.
                 print("Invalid input. \nPlease make sure you are entering the letter of your choice.")
             else:
@@ -127,6 +130,7 @@ def reason(gender):
                 return reasons  # Reason selection over, return list of reasons.
             else:
                 print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
+
 
 def ending(gender):
     """
@@ -161,7 +165,7 @@ def ending(gender):
                       "\n[b]", female_endings['b'])
             end = input(">")
             if end not in ("a", "b") \
-                    and (end not in ("c", "d", "e") or gender != "m")\
+                    and (end not in ("c", "d", "e") or gender != "m") \
                     and end not in ("A", "B") \
                     and (end not in ("C", "D", "E") or gender != "m"):
                 # Checks if the selected ending is valid for the gender.
@@ -182,6 +186,7 @@ def ending(gender):
             else:
                 print("Invalid input. \nPlease make sure you are entering 'yes' or 'no'.")
 
+
 def filename():
     """
     Prompts the user for the desired file name of the output mp3 file.
@@ -196,6 +201,7 @@ def filename():
             return name
         else:
             print("Invalid input. Please check to make sure that you have only entered letters and/or numbers.")
+
 
 def show_settings(gender, phone, reasons, endings):
     """
@@ -244,6 +250,7 @@ def show_settings(gender, phone, reasons, endings):
                 print("Get Name Error! (Invalid ending)")
                 sys.exit()
     return
+
 
 def confirm(gender, phone, reasons, endings):
     """

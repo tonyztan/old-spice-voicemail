@@ -22,6 +22,7 @@ __license__ = "MIT"
 __version__ = "1.0"
 __email__ = "tony@tonytan.io"
 
+
 def process(gender, phone, reasons, endings, out_filename):
     """
     Takes all the information and calls other functions to create the final mp3 file.
@@ -44,6 +45,7 @@ def process(gender, phone, reasons, endings, out_filename):
 
     print("\nYour recording has been created and saved! Enjoy!")
 
+
 def interactive():
     """
     Provides an interactive user interface.
@@ -63,6 +65,7 @@ def interactive():
     out_filename = prompt.filename()
     process(gender, phone, reasons, endings, out_filename)
 
+
 def syntax():
     """
     Prints out the correct syntax for command-line arguments, and then terminates the program.
@@ -73,6 +76,7 @@ def syntax():
     print("\nAlternatively, you may use the interactive mode by not entering any arguments, like this:"
           "\noldspice-voicemail.py")
     sys.exit()
+
 
 def parse_arguments(opts):
     """
@@ -130,6 +134,7 @@ def parse_arguments(opts):
     else:
         syntax()
 
+
 def main():
     """
     Calls either interactive() or parse_arguments().
@@ -147,5 +152,6 @@ def main():
         interactive()
     else:
         parse_arguments(opts)
+
 
 main()

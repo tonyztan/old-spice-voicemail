@@ -19,6 +19,7 @@ __license__ = "MIT"
 __version__ = "1.0"
 __email__ = "tony@tonytan.io"
 
+
 def download(name):
     """
     Downloads the file with the requested name from the server.
@@ -45,6 +46,7 @@ def download(name):
               "\n\nYou may wish to check your Internet connectivity or switch to a different network and try again.")
         sys.exit()
     return
+
 
 def get_name(category, gender, choice):
     """
@@ -108,6 +110,7 @@ def get_name(category, gender, choice):
         print("Get Name Error! (Invalid category)")
         sys.exit()
 
+
 def get_file_list(gender, phone, reasons, endings):
     """
     Creates a list of names of the files needed to produce the final mp3 based on user's preferences.
@@ -148,6 +151,7 @@ def get_file_list(gender, phone, reasons, endings):
         filenames.append(name)
 
     return filenames
+
 
 def concatenate(filenames, out_filename):
     """
